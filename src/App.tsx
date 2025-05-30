@@ -5,16 +5,12 @@ import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
 import Register from './pages/Register';
 import Login from './pages/Login';
-import { useSelector } from 'react-redux';
-import { RootState } from './store';
 import ProtectedRoute from './components/ProtectedRoute';
 import Home from './pages/Home';
 import PlaylistDetails from './pages/PlaylistDetails';
 import NotFound from './pages/NotFound';
 
 const App: React.FC = () => {
-  const token = useSelector((state: RootState) => state.auth.token);
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
