@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Card, Grid, CardContent, Typography, Fab, Box, CircularProgress, Button } from '@mui/material';
+import { Container, Card, CardContent, Typography, Fab, Box, CircularProgress, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import QueueMusicIcon from '@mui/icons-material/QueueMusic';
 import { useSelector } from 'react-redux';
@@ -107,42 +107,56 @@ const Home: React.FC = () => {
                                 </Typography>
                             </Box>
                         ) : (
-                            <Grid container spacing={3} justifyContent="center">
-                                {playlists?.map((playlist: any) => (
-                                    <Grid item xs={12} sm={6} md={4} key={playlist._id}>
-                                        <Card
-                                            sx={{
-                                                cursor: 'pointer',
-                                                transition: '0.2s',
-                                                '&:hover': { boxShadow: 6, bgcolor: 'primary.light' },
-                                            }}
-                                            onClick={() => navigate(`/playlist/${playlist._id}`)}
-                                        >
-                                            <CardContent>
-                                                <Box display="flex" alignItems="center" gap={1} justifyContent="space-between">
-                                                    <Box display="flex" alignItems="center" gap={1}>
-                                                        <QueueMusicIcon color="primary" />
-                                                        <Typography variant="h6" noWrap>
-                                                            {playlist.name}
-                                                        </Typography>
-                                                    </Box>
-                                                    <IconButton
-                                                        edge="end"
-                                                        aria-label="delete"
-                                                        size="small"
-                                                        onClick={e => {
-                                                            e.stopPropagation();
-                                                            handleDeleteClick(playlist._id);
-                                                        }}
-                                                    >
-                                                        <DeleteIcon color="error" />
-                                                    </IconButton>
+                             <Box sx={{ 
+                            display: 'flex', 
+                            flexWrap: 'wrap', 
+                            gap: 3, 
+                            justifyContent: 'center' 
+                        }}>
+                            {playlists?.map((playlist: any) => (
+                                <Box 
+                                    key={playlist._id} 
+                                    sx={{ 
+                                        width: { 
+                                            xs: '100%', 
+                                            sm: 'calc(50% - 24px)', 
+                                            md: 'calc(33.333% - 24px)' 
+                                        } 
+                                    }}
+                                >
+                                    <Card
+                                        sx={{
+                                            cursor: 'pointer',
+                                            transition: '0.2s',
+                                            '&:hover': { boxShadow: 6, bgcolor: 'primary.light' },
+                                        }}
+                                        onClick={() => navigate(`/playlist/${playlist._id}`)}
+                                    >
+                                        <CardContent>
+                                            <Box display="flex" alignItems="center" gap={1} justifyContent="space-between">
+                                                <Box display="flex" alignItems="center" gap={1}>
+                                                    <QueueMusicIcon color="primary" />
+                                                    <Typography variant="h6" noWrap>
+                                                        {playlist.name}
+                                                    </Typography>
                                                 </Box>
-                                            </CardContent>
-                                        </Card>
-                                    </Grid>
-                                ))}
-                            </Grid>
+                                                <IconButton
+                                                    edge="end"
+                                                    aria-label="delete"
+                                                    size="small"
+                                                    onClick={e => {
+                                                        e.stopPropagation();
+                                                        handleDeleteClick(playlist._id);
+                                                    }}
+                                                >
+                                                    <DeleteIcon color="error" />
+                                                </IconButton>
+                                            </Box>
+                                        </CardContent>
+                                    </Card>
+                                </Box>
+                            ))}
+                        </Box>
                         )}
 
                     </>
